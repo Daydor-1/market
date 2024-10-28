@@ -1,0 +1,28 @@
+{% extends "firstapp/base.html" %}
+
+{% block title %}Conversation{% endblock %}
+
+{% block content %}
+<h1 class='mb-6 text-3xl'>Conversation</h1>
+
+<div class='space-y-6'>
+    {% for oh in conversation.messages.all %}
+        <div class="p-6 flex bg-blue-100 rounded-xl">
+            <div>
+                <p class='mb-4'><strong>{{ oh.created_by.username }}</strong> @ {{ oh.created_at }}</p>
+                <p>{{ oh.content }}</p>
+            </div>
+        </div>
+        
+    {% endfor %}
+</div>
+
+<form action="." method="post" class='mt-6'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class='py-4 px-8 text-lg bg-teal-500 text-white rounded-xl hover:bg-teal-700'>Send</button>
+</form>
+
+{%endblock%}
